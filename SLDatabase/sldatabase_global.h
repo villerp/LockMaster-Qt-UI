@@ -1,0 +1,12 @@
+#ifndef SLDATABASE_GLOBAL_H
+#define SLDATABASE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(SLDATABASE_LIBRARY)
+#  define SLDATABASESHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define SLDATABASESHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // SLDATABASE_GLOBAL_H

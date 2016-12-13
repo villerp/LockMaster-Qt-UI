@@ -1,0 +1,12 @@
+#ifndef SLAJASTIN_GLOBAL_H
+#define SLAJASTIN_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(SLAJASTIN_LIBRARY)
+#  define SLAJASTINSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define SLAJASTINSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // SLAJASTIN_GLOBAL_H
