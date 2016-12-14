@@ -28,18 +28,21 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(olioSLRFID, SIGNAL(canRead()), this, SLOT(readData()));                     //SLRFID-kirjastossa pyörii serial-toiminnot, lisätietoja sieltä
 
     //alustava kellonajan näyttö, joka ilmestyy heti sovelluksen käynnistyessä. (pieni hienous)
-    ui->label->setAlignment(Qt::AlignCenter);
+    ui->label->setAlignment(Qt::AlignRight);
     ui->label->setText(olioSLAjastin->Ajastin());
 
     countdown->start(1000);                                                             //sekunnin (1000 ms) ajastimen käynnistys
 
     //tässä tehdään pääikkunan kuva ja sen dimensiot
-    QWidget *frame = new QWidget(this);
-    frame->setGeometry(350, 170, 500, 600);
-    frame->setStyleSheet("border-image: url(/home/pi/Documents/Qt_Programs/Elektroninen_lukko/kuvat/RFID-kuva.jpg)");       //haluttu kuva
+    ui->label_3->setAlignment(Qt::AlignCenter);
+    //QWidget *frame = new QWidget(this);
+    //frame->setGeometry(350, 170, 500, 600);
+    //frame->setStyleSheet("border-image: url(/home/pi/Documents/Qt_Programs/Elektroninen_lukko/kuvat/RFID-kuva.jpg)");       //haluttu kuva
+    QPixmap frame("/home/pi/Documents/Qt_Programs/Elektroninen_lukko/kuvat/RFID-kuva.jpg");
+    ui->label_3->setPixmap(frame);
 
-    //kortti = "290049DF6A";                                                            //kortin numero voidaan pakottaa halutunlaiseksi, jos esim. rfid-luku ei ole käytettävissä
-    //emit korttiSignal(kortti);
+    kortti = "290049DF6A";                                                            //kortin numero voidaan pakottaa halutunlaiseksi, jos esim. rfid-luku ei ole käytettävissä
+    emit korttiSignal(kortti);
 
     olioLukonAvaus->lukkoProsessiLow();                                                 //pidetään huoli, että sovelluksen käynnistyessä lukko on lukossa
 }
