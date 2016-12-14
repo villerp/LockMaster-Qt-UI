@@ -27,7 +27,8 @@ Pinkoodi::Pinkoodi(QWidget *parent) :
     countdown2->start(1000);            //kellonajan timer, eli kellonaika haetaan sekunnin välein
 
     //oikean yläkulman kellonajan esitys
-    ui->labelAika->setAlignment(Qt::AlignCenter);
+    ui->labelAika->setAlignment(Qt::AlignRight);
+    ui->labelKoodiView->setAlignment(Qt::AlignCenter);
     ui->labelAika->setText(olioSLAjastin->Ajastin());
 
     olioSLDatabase->Tietokanta();       //yhdistys tietokantaan
@@ -79,7 +80,7 @@ void Pinkoodi::timeOut()
 //kellonajan päivitys
 void Pinkoodi::timeOut2()
 {
-    ui->labelAika->setAlignment(Qt::AlignCenter);
+    ui->labelAika->setAlignment(Qt::AlignRight);
     ui->labelAika->setText(olioSLAjastin->Ajastin());
 }
 

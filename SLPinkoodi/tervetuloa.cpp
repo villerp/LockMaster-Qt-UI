@@ -15,7 +15,7 @@ Tervetuloa::Tervetuloa(QWidget *parent) :
     connect(countdown,SIGNAL(timeout()),this,SLOT(timeOut()));
 
     //kellonajan alustava sijoitus ja esitys
-    ui->labelTime->setAlignment(Qt::AlignCenter);
+    ui->labelTime->setAlignment(Qt::AlignRight);
     ui->labelTime->setText(olioSLAjastin->Ajastin());
 
     Seconds = 30;       //aika (s), jonka kuluttua viimeistään lukko menee takaisin lukkoon.
@@ -59,7 +59,7 @@ void Tervetuloa::timeOut()
     Seconds--;      //muuttujan pienennys
 
     //kellonajan päivitys
-    ui->labelTime->setAlignment(Qt::AlignCenter);
+    ui->labelTime->setAlignment(Qt::AlignRight);
     ui->labelTime->setText(olioSLAjastin->Ajastin());
 
     //tekstiä
