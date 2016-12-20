@@ -15,6 +15,7 @@
 #include "korttifail.h"
 #include "lukonavaus.h"
 #include "slmusa.h"
+#include "koodivirhe.h"
 
 namespace Ui {
 class Pinkoodi;
@@ -72,6 +73,7 @@ private:
     QTimer *countdown, *countdown2;
     LukonAvaus *olioLukonAvaus;
     SLMusa *olioSLMusa;
+    Koodivirhe *olioKoodivirhe;
 };
 
 #endif // PINKOODI_H

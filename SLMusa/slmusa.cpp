@@ -22,42 +22,42 @@ void SLMusa::Sulje()
 void SLMusa::Countdown()
 {
     olioMusiikki = new QProcess;
-    olioMusiikki->start("aplay /home/pi/Documents/Qt_Programs/Elektroninen_lukko/musat/Countdown_Theme2.wav");
+    olioMusiikki->start("aplay /home/pi/Desktop/Elektroninen_lukko/musat/Countdown_Theme2.wav");
 }
 
 //ensimmäisen yrityksen musa
 void SLMusa::Tuplaatko()
 {
     olioMusiikki = new QProcess;
-    olioMusiikki->start("aplay /home/pi/Documents/Qt_Programs/Elektroninen_lukko/musat/Jokeripokeri_tuplaatko_loop.wav");
+    olioMusiikki->start("aplay /home/pi/Desktop/Elektroninen_lukko/musat/Jokeripokeri_tuplaatko_loop1.wav");
 }
 
 //toisen yrityksen musa
 void SLMusa::Tuplaus()
 {
     olioMusiikki = new QProcess;
-    olioMusiikki->start("aplay /home/pi/Documents/Qt_Programs/Elektroninen_lukko/musat/Jokeripokeri_tuplaus_loop.wav");
+    olioMusiikki->start("aplay /home/pi/Desktop/Elektroninen_lukko/musat/Jokeripokeri_tuplaus_loop.wav");
 }
 
 //kolmannen yrityksen musa
 void SLMusa::TuplausNopea()
 {
     olioMusiikki = new QProcess;
-    olioMusiikki->start("aplay /home/pi/Documents/Qt_Programs/Elektroninen_lukko/musat/Jokeripokeri_tuplaus2_loop.wav");
+    olioMusiikki->start("aplay /home/pi/Desktop/Elektroninen_lukko/musat/Jokeripokeri_tuplaus2_loop.wav");
 }
 
 //koodi tai kortin numero väärin -ääni
 void SLMusa::koodiFail()
 {
     olioMusiikki = new QProcess;
-    olioMusiikki->start("aplay /home/pi/Documents/Qt_Programs/Elektroninen_lukko/musat/kusahus.wav");
+    olioMusiikki->start("aplay /home/pi/Desktop/Elektroninen_lukko/musat/kusahus.wav");
 }
 
 //kortti on lukittu -musa
 void SLMusa::Payne()
 {
     olioMusiikki = new QProcess;
-    olioMusiikki->start("aplay /home/pi/Documents/Qt_Programs/Elektroninen_lukko/musat/max_payne1.wav");
+    olioMusiikki->start("aplay /home/pi/Desktop/Elektroninen_lukko/musat/max_payne1.wav");
 }
 
 //nämä kaksi jätin vain siksi, koska kääntäjä heitti jotain tuntematon herjaa niistä... Eivät tee mitään, joten antaa olla

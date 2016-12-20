@@ -9,7 +9,7 @@ LukonAvaus::LukonAvaus(){}
 void LukonAvaus::lukkoProsessiHigh()
 {
     prosessi1 = new QProcess();
-    prosessi1->setWorkingDirectory("/home/pi/Documents/Qt_Programs/Elektroninen_lukko/LukkoExe");
+    prosessi1->setWorkingDirectory("/home/pi/Desktop/Elektroninen_lukko/LukkoExe");
     prosessi1->start("sh high.sh");
 }
 
@@ -17,6 +17,6 @@ void LukonAvaus::lukkoProsessiHigh()
 void LukonAvaus::lukkoProsessiLow()
 {
     prosessi2 = new QProcess();
-    prosessi2->setWorkingDirectory("/home/pi/Documents/Qt_Programs/Elektroninen_lukko/LukkoExe");
+    prosessi2->setWorkingDirectory("/home/pi/Desktop/Elektroninen_lukko/LukkoExe");
     prosessi2->start("sh low.sh");
 }

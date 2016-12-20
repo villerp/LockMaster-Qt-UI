@@ -14,13 +14,17 @@ DEFINES += SLPINKOODI_LIBRARY
 SOURCES += slpinkoodi.cpp \
     pinkoodi.cpp \
     tervetuloa.cpp \
-    korttifail.cpp
+    korttifail.cpp \
+    koodivirhe.cpp \
+    aktivoimaton.cpp
 
 HEADERS += slpinkoodi.h\
         slpinkoodi_global.h \
     pinkoodi.h \
     tervetuloa.h \
-    korttifail.h
+    korttifail.h \
+    koodivirhe.h \
+    aktivoimaton.h
 
 unix {
     target.path = /usr/lib
@@ -30,7 +34,9 @@ unix {
 FORMS += \
     pinkoodi.ui \
     tervetuloa.ui \
-    korttifail.ui
+    korttifail.ui \
+    koodivirhe.ui \
+    aktivoimaton.ui
 
 unix:!macx: LIBS += -L$$PWD/../build-SLDatabase-Desktop-Release/ -lSLDatabase
 

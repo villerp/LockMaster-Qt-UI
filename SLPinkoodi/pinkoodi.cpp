@@ -13,6 +13,7 @@ Pinkoodi::Pinkoodi(QWidget *parent) :
     olioKorttifail = new Korttifail;
     olioLukonAvaus = new LukonAvaus;
     olioSLMusa = new SLMusa;
+    olioKoodivirhe = new Koodivirhe;
     ui->setupUi(this);
 
     connect(this, SIGNAL(pinSignal(QString)), this, SLOT(pinSlot(QString)));        //annettu pin-string syötetään pinSlot-funktioon inputtina
@@ -32,6 +33,8 @@ Pinkoodi::Pinkoodi(QWidget *parent) :
     ui->labelAika->setText(olioSLAjastin->Ajastin());
 
     olioSLDatabase->Tietokanta();       //yhdistys tietokantaan
+
+    this->setWindowState(Qt::WindowFullScreen);
 }
 
 //oliot tuhotaan
@@ -44,6 +47,7 @@ Pinkoodi::~Pinkoodi()
     delete olioKorttifail;
     delete olioLukonAvaus;
     delete olioSLMusa;
+    delete olioKoodivirhe;
     delete ui;
 }
 
@@ -230,15 +234,12 @@ void Pinkoodi::pinSlot(QString pin)
         }
         else                                                //koodi tai nro väärin
         {
-            yritykset--;                                    //yritysten määrän pienennys
-            olioSLMusa->koodiFail();                        //kämmäysääni
+            yritykset--;//yritysten määrän pienennys
+
             if (yritykset >= 1)                             //yrityksiä jäljellä 1 tai enemmän
             {
-                //tehdään messagebox-ilmoitus. Muuttujan lisääminen stringiin tapahtuu arg:n kautta
-                QString tiedotus = QString("Pinkoodi väärin, yrityksiä jäljellä: %1").arg(yritykset);
-                QMessageBox::critical(this, tr("Virhe"),tiedotus);
-
-                olioSLMusa->Sulje();                        //musat pois
+                olioKoodivirhe->yrityksetKoppi(yritykset);  //lähettää yritysten määrän Koodivirhe-dialogiin
+                olioKoodivirhe->show();                     //näyttää virheilmoituksen
             }
             on_pushButton_backspace_clicked();              //pinreset
             timer_start(1000);                              //timerin uudelleenkäynnistys
@@ -254,7 +255,6 @@ void Pinkoodi::pinSlot(QString pin)
     if (yritykset == 0)                                     //kaikki kolme yritystä kusi
     {
         yritykset = 3;                                      //yritysten reset
-        olioSLMusa->Sulje();                                //musat pois
         countdown->stop();                                  //timer seis
         olioKorttifail->playPayne();                        //tunnelmamusa päälle
         olioKorttifail->timer_start(1000);                  //Korttifail-ikkunan timer päälle

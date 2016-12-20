@@ -8,14 +8,15 @@
 #include <QDebug>
 #include <QtCore/QtGlobal>
 #include <QDateTime>
-#include <QMessageBox>
 #include <QtGui>
+#include <QMouseEvent>
 #include "sldatabase.h"
 #include "slpinkoodi.h"
 #include "pinkoodi.h"
 #include "slajastin.h"
 #include "slrfid.h"
 #include "lukonavaus.h"
+#include "aktivoimaton.h"
 #include "slmusa.h"         //"sl"-alkuiset (ja lukonavaus.h) headerit ovat itse tehtyjä kirjastoja. Ks. pro-tiedoston polut
 
 namespace Ui {
@@ -30,6 +31,7 @@ public:
 
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void mouseDoubleClickEvent(QMouseEvent *e);
 
 private slots:
 
@@ -55,6 +57,7 @@ private:
     SLRFID *olioSLRFID;
     LukonAvaus *olioLukonAvaus;
     SLMusa *olioSLMusa;
+    Aktivoimaton *olioAktivoimaton;
 };
 
 #endif // MAINWINDOW_H

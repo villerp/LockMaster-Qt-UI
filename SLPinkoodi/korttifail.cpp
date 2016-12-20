@@ -15,6 +15,7 @@ Korttifail::Korttifail(QWidget *parent) :
     timer->start(1000);     //sekunnin timer
 
     //kuvien luonti ja sijoittelut
+    /*
     QWidget *frame = new QWidget(this);
     QWidget *frame2 = new QWidget(this);
     QWidget *frame3 = new QWidget(this);
@@ -30,6 +31,8 @@ Korttifail::Korttifail(QWidget *parent) :
     frame4->setStyleSheet("border-image: url(/home/pi/Documents/Qt_Programs/Elektroninen_lukko/kuvat/denied.jpg)");
     frame5->setGeometry(400, 300, 400, 400);
     frame5->setStyleSheet("border-image: url(/home/pi/Documents/Qt_Programs/Elektroninen_lukko/kuvat/picard.jpg)");
+    */
+    this->setWindowState(Qt::WindowFullScreen);
 }
 
 //tuhot...

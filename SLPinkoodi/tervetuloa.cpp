@@ -19,6 +19,8 @@ Tervetuloa::Tervetuloa(QWidget *parent) :
     ui->labelTime->setText(olioSLAjastin->Ajastin());
 
     Seconds = 30;       //aika (s), jonka kuluttua viimeistään lukko menee takaisin lukkoon.
+
+    this->setWindowState(Qt::WindowFullScreen);
 }
 
 //tuhot...

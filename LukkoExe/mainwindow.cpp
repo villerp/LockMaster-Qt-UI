@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     olioSLDatabase = new SLDatabase;
     olioSLAjastin = new SLAjastin;
     olioLukonAvaus = new LukonAvaus;
+    olioAktivoimaton = new Aktivoimaton;
     countdown = new QTimer;
     ui->setupUi(this);
 
@@ -21,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QRect position = frameGeometry();
     position.moveCenter(QDesktopWidget().availableGeometry().center());
     move(position.topLeft());
+    //this->setWindowState(Qt::WindowMaximized);
 
     connect(this, SIGNAL(korttiSignal(QString)), this, SLOT(korttiSlot(QString)));      //korttislot saa korttisignaalin, eli sen, mitä RF-lukija saa kortilta
     connect(countdown, SIGNAL(timeout()), this, SLOT(pvmKutsu()));                      //ajastin-connect. pvmKutsu suoritetaan aina kun timeout tapahtuu (tässä tapauksessa sekunnin välein)
@@ -41,8 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap frame("/home/pi/Documents/Qt_Programs/Elektroninen_lukko/kuvat/RFID-kuva.jpg");
     ui->label_3->setPixmap(frame);
 
-    kortti = "290049DF6A";                                                            //kortin numero voidaan pakottaa halutunlaiseksi, jos esim. rfid-luku ei ole käytettävissä
-    emit korttiSignal(kortti);
+    //kortti = "290049DF6A";                                                            //kortin numero voidaan pakottaa halutunlaiseksi, jos esim. rfid-luku ei ole käytettävissä
+    //emit korttiSignal(kortti);
 
     olioLukonAvaus->lukkoProsessiLow();                                                 //pidetään huoli, että sovelluksen käynnistyessä lukko on lukossa
 }
@@ -54,6 +56,15 @@ void MainWindow::readData()
     emit korttiSignal(kortti);                                                          //kortti-string --------------->kortti-slot
 }
 
+void MainWindow::mouseDoubleClickEvent(QMouseEvent *e) {
+  QWidget::mouseDoubleClickEvent(e);
+  if(isFullScreen()) {
+     this->setWindowState(Qt::WindowMaximized);
+  } else {
+     this->setWindowState(Qt::WindowFullScreen);
+  }
+}
+
 //ajastin-kirjaston funktio Ajastin() palauttaa sekunnilleen tarkan kellonajan
 void MainWindow::pvmKutsu()
 {
@@ -61,6 +72,7 @@ void MainWindow::pvmKutsu()
     QString aika = olioSLAjastin->Ajastin();
     aika.resize(2);
     tunnit = aika.toInt();                                      //palautetusta kellonajasta otetaan talteen tunnit (kaksi ensimmäistä merkkiä), jotta tiedetään, onko kyseessä iltakulku vai ei
+
     tunnit = 24;                                                //tuntien arvon voi testausmielessä pakottaa mieluiseksi (päiväarvot: 6-18, iltaarvot: kaikki muut). Täytyy olla int (tms numero)
 }
 
@@ -75,6 +87,7 @@ MainWindow::~MainWindow()
     delete olioSLRFID;
     olioLukonAvaus->lukkoProsessiLow();                                                 //lukko varmasti lukkoon ohjelman sammuessa
     delete olioLukonAvaus;
+    delete olioAktivoimaton;
     delete ui;
 }
 //kortti-string tulee signaalina tänne ja sen perusteella haetaan tietokannasta tietoja
@@ -94,7 +107,8 @@ void MainWindow::korttiSlot(QString kortti)
     {
         if (aktivointi == "0")                                                          //tarkistetaan onko löytynyt kortti aktivoitu
         {
-            QMessageBox::information(this, tr("Tiedotus"), tr("Korttia ei ole aktivoitu. Ota yhteys valvojaan."));      //ilmoitus ei-aktivoidusta kortista
+            olioAktivoimaton->Kusahus();
+            olioAktivoimaton->show();                                                   //ilmoitus ei-aktivoidusta kortista
             olioSLDatabase->kulkuF(kortti, asiakas, 0, 0);                              //kulkuhistoriaan tulee merkintä (ks. syntaksi -> sldatabase.cpp)
         }
         else

@@ -65,7 +65,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
+    <item row="2" column="0" alignment="Qt::AlignHCenter">
      <widget class="QLabel" name="label_3">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -81,8 +81,8 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>1085</width>
-        <height>1200</height>
+        <width>800</width>
+        <height>1000</height>
        </size>
       </property>
       <property name="layoutDirection">
